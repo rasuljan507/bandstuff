@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Поддержать проект</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+    .donate-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    input, textarea, select {
+      padding: 10px;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 400px;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 4px 0 #c17400,
+        0 5px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="/" class="logo">BandStuff</a>
+      <a class="menu-item" href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item" href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item" href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item" href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item" href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item" href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item" href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item" href="checklist.html">📋<span>Чек-лист</span></a>
+      <a class="menu-item" href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <div class="donate-container">
+    <h2>Поддержать проект</h2>
+    <p>BandStuff.ru — некоммерческий проект, и ваша поддержка помогает нам развиваться. Спасибо за ваше участие! ❤️</p>
+    <form>
+      <label>Сумма<br>
+        <select>
+          <option>100</option>
+          <option>250</option>
+          <option>500</option>
+          <option>1000</option>
+        </select> руб.
+      </label><br>
+      <label>Ваш комментарий<br>
+        <textarea rows="3" placeholder="(необязательно)"></textarea>
+      </label><br>
+      <button type="submit" class="btn">Пожертвовать</button>
+    </form>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> ·  
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="donate.html" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

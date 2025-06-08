@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мудрости</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+    .wisdom-container {
+      max-width: 700px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+    .wisdom-text {
+      font-size: 1.3rem;
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+    .author {
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      font-style: italic;
+      color: #666;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 4px 0 #c17400,
+        0 5px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
+      .menu-item {
+        flex: 1 0 20%;
+        text-align: center;
+      }
+      .logo {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+      .wisdom-container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="index.html" class="logo">BandStuff</a>
+      <a class="menu-item" href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item" href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item" href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item" href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item" href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item" href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item" href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item" href="checklist.html">📋<span>Чек-лист</span></a>
+      <a class="menu-item" href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <div class="wisdom-container">
+    <h2>Мудрость:</h2>
+    <div class="wisdom-text" id="wisdom">—</div>
+    <div class="author" id="author">—</div>
+    <button class="btn" onclick="generateWisdom()">Сгенерировать</button>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">
+      новое мудрое высказывание или <a href="wheel.html" style="color:black; text-decoration: underline;">Колесо фортуны?</a>
+    </p>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> · 
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="donate.html" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+
+  <script>
+    const quotes = [
+    { text: "Тот, кто победил других — силён. Тот, кто победил себя — могуществен.", author: "Лао-цзы" },
+    { text: "Чем больше у человека ума, тем больше оригинальных людей он находит. Обычные видят только сходство.", author: "Блез Паскаль" },
+    { text: "Побеждает не тот, кто сильнее, а тот, кто готов идти до конца.", author: "Неизвестен" },
+    { text: "Тирания любит злых именно потому, что любит лесть...", author: "Аристотель" },
+    { text: "Делай, что должно — и будь, что будет.", author: "Цицерон" },
+    { text: "Не бойся совершенства — тебе его не достичь.", author: "Сальвадор Дали" },
+    { text: "Никогда не сдавайся. Сегодня трудно — завтра будет хуже, но потом будет солнце.", author: "Джек Ма" },
+    { text: "Сила — в правде. У кого правда, тот и сильнее.", author: "Брат 2" },
+    { text: "Мудр тот, кто знает нужное, а не многое.", author: "Эсхил" },
+    { text: "Если ты хочешь изменить мир — начни с себя.", author: "Махатма Ганди" },
+    { text: "Лучше быть хорошим человеком, ругающимся матом, чем тихим, воспитанным мерзавцем.", author: "Фаина Раневская" },
+    { text: "Умный не тот, кто много знает, а тот, кто знает нужное.", author: "Гераклит" },
+    { text: "Мудрость начинается с удивления.", author: "Сократ" },
+    { text: "Чем тише человек, тем громче его поступки.", author: "Неизвестен" },
+    { text: "Доверяй, но проверяй.", author: "Владимир Ленин" },
+    { text: "Пока ты откладываешь жизнь, она проходит.", author: "Сенека" },
+    { text: "Настоящая любовь не поддаётся логике.", author: "Фридрих Ницше" },
+    { text: "Глупец жалуется на других. Умный жалуется на себя.", author: "Конфуций" },
+    { text: "Не тот велик, кто никогда не падал, а тот, кто падал и вставал.", author: "Конфуций" },
+    { text: "Живи так, будто завтра не наступит.", author: "Неизвестен" },
+    { text: "Чтобы быть незаменимым, нужно всё время меняться.", author: "Коко Шанель" },
+    { text: "Никогда не недооценивай глупость людей в больших количествах.", author: "Неизвестен" },
+    { text: "Ты не можешь изменить направление ветра, но можешь настроить паруса.", author: "Долли Партон" },
+    { text: "Только тот, кто рискует, может узнать, насколько далеко он может зайти.", author: "Томас Эдисон" },
+    { text: "Счастье не в деньгах, а в их количестве.", author: "Неизвестен" },
+    { text: "Удача улыбается смелым.", author: "Вергилий" },
+    { text: "Кто хочет — ищет возможности. Кто не хочет — ищет причины.", author: "Стивен Кови" },
+    { text: "Тот, кто умеет ждать, всегда получает лучшее.", author: "Лев Толстой" },
+    { text: "Самый тёмный час — перед рассветом.", author: "Неизвестен" },
+    { text: "Каждому воздастся по делам его.", author: "Иисус Христос" },
+    { text: "Умей отпускать то, что тебя разрушает.", author: "Будда" },
+    { text: "Мир принадлежит оптимистам, пессимисты — просто зрители.", author: "Франсуа Гизо" },
+    { text: "Иногда молчание — лучший ответ.", author: "Далай-лама" },
+    { text: "Истина — это дочь времени.", author: "Фрэнсис Бэкон" },
+    { text: "Слова ранят глубже, чем меч.", author: "Уильям Шекспир" },
+    { text: "Кто хочет удержать — теряет. Кто готов отпустить — получает.", author: "Неизвестен" },
+    { text: "Всё, что нас не убивает, делает нас сильнее.", author: "Фридрих Ницше" },
+    { text: "Знание — сила.", author: "Фрэнсис Бэкон" },
+    { text: "Лучше прожить один день львом, чем сто лет овцой.", author: "Итальянская пословица" },
+    { text: "Мы видим вещи не такими, какие они есть, а такими, какие мы есть.", author: "Анаис Нин" },
+    { text: "Делай сегодня то, что другие не хотят — завтра будешь жить так, как другие не могут.", author: "Джерри Райс" },
+    { text: "Мудрость — это знание, проверенное опытом.", author: "Неизвестен" },
+    { text: "Жизнь — это то, что с тобой происходит, пока ты строишь планы.", author: "Джон Леннон" },
+    { text: "Свобода — это право говорить то, что ты думаешь.", author: "Джордж Оруэлл" },
+    { text: "Лучше быть ненавидимым за то, кто ты есть, чем любимым за то, кем ты не являешься.", author: "Андре Жид" },
+    { text: "Разумный уступает. Вот почему мир принадлежит дуракам.", author: "Оскар Уайльд" },
+    { text: "Счастье — это когда то, что ты думаешь, говоришь и делаешь, находится в гармонии.", author: "Ганди" },
+    { text: "Мы не получаем мудрость, мы должны открыть её для себя.", author: "Марсель Пруст" },
+    { text: "Чем меньше у человека достоинства, тем громче он его защищает.", author: "Неизвестен" }
+    ];
+
+    function generateWisdom() {
+      const item = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('wisdom').textContent = item.text;
+      document.getElementById('author').textContent = '— ' + item.author;
+    }
+
+    generateWisdom();
+  </script>
+</body>
+</html>

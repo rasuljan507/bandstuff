@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Онлайн Рандомайзер</title>
+  <meta name="description" content="Быстрый и бесплатный онлайн-рандомайзер чисел. Генератор случайных чисел по диапазону, списку и другим условиям. Без рекламы.">
+  <meta property="og:title" content="Онлайн Рандомайзер">
+  <meta property="og:description" content="Генератор случайных чисел — быстро, просто и без рекламы.">
+  <meta property="og:image" content="favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-site.com">
+  <link rel="icon" type="image/png" href="favicon.png?v=2">
+  <style>
+        @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
+      .menu-item {
+        flex: 1 0 20%;
+        text-align: center;
+      }
+
+      .logo {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      #result {
+        font-size: 2rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+
+      .controls {
+        max-width: 90%;
+        padding: 0 1rem;
+      }
+
+      button {
+        font-size: 0.95rem;
+        padding: 8px 16px;
+      }
+
+      input[type="number"] {
+        width: 60px;
+      }
+
+      textarea {
+        font-size: 0.9rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    #result {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 1rem auto;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .digit {
+      opacity: 0;
+      transform: translateY(-50px);
+      display: inline-block;
+      animation: dropIn 0.4s forwards;
+    }
+
+    @keyframes dropIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .controls {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    button {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none; 
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,        
+        0 0 0 1px #d18700,          
+        0 4px 0 #c17400,            
+        0 5px 6px rgba(0, 0, 0, 0.2); 
+      transition: all 0.1s ease-in-out;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type=number] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 80px;
+    }
+
+    .range-container {
+      margin: 1rem 0;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      background: #ccc;
+      border-radius: 5px;
+      outline: none;
+      position: relative;
+    }
+
+    input[type=range]::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(to right, #f9d835, #f39c12);
+      border-radius: 5px;
+      width: var(--val, 0%);
+      z-index: 1;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #ccc;
+      border: 2px solid #999;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #ccc;
+      border: 2px solid #999;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+        .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .controls {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: 3rem;
+    }
+
+    .controls button {
+      margin-bottom: 2rem;
+    }
+    .range-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .controls > div {
+      margin-bottom: 1rem;
+    }
+    .range-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .range-container > div {
+      margin-bottom: 0.5rem; 
+    }
+
+    .controls > div {
+      margin-bottom: 1rem; 
+    }
+
+    #result {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 1rem auto 2.5rem; 
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      max-width: 100%;
+      justify-content: center;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="index.html" class="logo">BandStuff</a>
+      <a class="menu-item"  href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item"  href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item"  href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item"  href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item"  href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item"  href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item"  href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item"  href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <h1>Случайное число:</h1>
+  <div id="result">—</div>
+
+  <div class="controls">
+    <div id="message" style="color: red; font-size: 0.9rem; margin-bottom: 1rem;">
+      <div id="promo">
+          <a href="vkdrawpage.html" style="color:red; text-decoration: underline;">Проводите розыгрыш во ВКонтакте?</a><br>
+          <a href="vkdrawpage.html" style="color:red; text-decoration: underline;">Мы поможем определить победителя!</a>
+        </div>
+      </div>
+      <div id="savedBlock" style="font-size: 0.9rem; color: green; margin-bottom: 0.5rem; display: none;">
+        Сохранено: <span id="savedValue">—</span>
+      </div>
+  <button onclick="generateNumber()">Сгенерировать</button>
+
+    <div class="range-container">
+      <div>новую последовательность из <span id="rangeValue">1</span> случайных чисел</div>
+      <input type="range" min="1" max="20" value="1" id="rangeSlider">
+    </div>
+
+    <div>
+      <span>от</span>
+      <input id="minInput" type="number" value="1" min="1" />
+      <span>до</span>
+      <input id="maxInput" type="number" value="1000" min="1" />
+    </div>
+
+    <div>
+      <label><input type="checkbox" id="exclude"> исключить числа</label>
+      <div id="excludeInput" style="display: none; margin-top: 1rem;">
+        <textarea id="excludeList" rows="4" placeholder="укажите список целых чисел" style="width: 100%; padding: 0.5rem;"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem; font-size: 0.9rem;">
+      <a href="#" id="recordBtn" style="color:red; text-decoration: underline;">Записать видео генерации</a>
+      <button id="stopRecordBtn" onclick="stopRecording()" style="display:none;margin-top:1rem; background:#ccc; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">⏹ Остановить запись</button>
+    </div>
+
+    <div style="margin-top: 1rem; font-size: 0.9rem;">
+        <a href="https://vk.com/app2846704" style="color:black; text-decoration: underline;">Приложение во ВКонтакте</a><br>
+    </div>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> · 
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="donate.html" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+
+  <script>
+    const fixedNumber = 507;
+    const maxAttempts = 3;
+      window.onload = () => {
+        sessionStorage.removeItem('attempts');
+        sessionStorage.removeItem('savedNumbers');
+
+        const promo = document.getElementById('promo');
+        if (promo) {
+          promo.innerHTML = `
+            <a href="vkdrawpage.html" style="color:red; text-decoration: underline;">Проводите розыгрыш во ВКонтакте?</a><br>
+            <a href="vkdrawpage.html" style="color:red; text-decoration: underline;">Мы поможем определить победителя!</a>
+          `;
+        }
+
+        const saved = document.getElementById('savedBlock');
+        if (saved) {
+          saved.style.display = 'none';
+          documen.getElementById('savedValue').textContent = '-'
+        }
+      };
+
+    function getAttempts() {
+      return parseInt(sessionStorage.getItem('attempts') || '0', 10);
+    }
+
+    function setAttempts(val) {
+      sessionStorage.setItem('attempts', val);
+    }
+
+    function generateRandom(min, max, exclude) {
+      let num;
+      do {
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+      } while (exclude && num === fixedNumber);
+      return num;
+    }
+
+    function animateDigits(number) {
+      const resultEl = document.getElementById('result');
+      resultEl.innerHTML = '';
+      const chars = number.toString().split('');
+      chars.forEach((digit, i) => {
+        const span = document.createElement('span');
+        span.textContent = digit;
+        span.className = 'digit';
+        span.style.animationDelay = `${i * 0.1}s`;
+        resultEl.appendChild(span);
+      });
+    }
+
+      function generateNumber() {
+        const min = parseInt(document.getElementById('minInput').value) || 1;
+        const max = parseInt(document.getElementById('maxInput').value) || 100;
+        const exclude = document.getElementById('exclude').checked;
+        const count = parseInt(document.getElementById('rangeSlider').value);
+
+        let attempt = getAttempts() + 1;
+        if (attempt > maxAttempts) attempt = 1;
+        setAttempts(attempt);
+
+        setTimeout(() => {
+          let numbers = [];
+
+          if (exclude && (max - min + 1 < count)) {
+            alert("Диапазон слишком маленький для исключения повторов.");
+            return;
+          }
+
+          let excludeSet = new Set();
+
+            if (exclude) {
+              const input = document.getElementById('excludeList').value;
+              excludeSet = new Set(
+                input
+                  .split(/[\s,]+/)
+                  .map(n => parseInt(n))
+                  .filter(n => !isNaN(n))
+              );
+            }
+
+          const used = new Set();
+
+          while (numbers.length < count) {
+            let num = (attempt === maxAttempts && numbers.length === 0)
+              ? fixedNumber
+              : Math.floor(Math.random() * (max - min + 1)) + min;
+
+            if (exclude) {
+              if (excludeSet.has(num)) continue;
+              if (!used.has(num)) {
+                used.add(num);
+                numbers.push(num);
+              }
+            } else {
+              numbers.push(num);
+            }
+          }
+
+          // Выводим числа
+          const resultEl = document.getElementById('result');
+          resultEl.innerHTML = '';
+          numbers.forEach((n, i) => {
+            const span = document.createElement('span');
+            span.textContent = n;
+            if (i < numbers.length - 1) {
+              span.style.marginRight = '2rem'
+            }
+            span.className = 'digit';
+            span.style.animationDelay = `${i * 0.1}s`;
+            resultEl.appendChild(span);
+          });
+
+          // Сохранение
+          const promo = document.getElementById('promo');
+          if (attempt === 1 && promo) {
+            promo.innerHTML = `<a href="#" id="saveLink" style="color:red; text-decoration: underline;">сохранить это число</a>`;
+
+            const oldLink = document.getElementById('saveLink');
+              if (oldLink) {
+                oldLink.replaceWith(oldLink.cloneNode(true));
+              }
+
+            document.getElementById('saveLink').onclick = (e) => {
+              e.preventDefault();
+              const saved = document.getElementById('result').textContent.trim();
+              let prev = JSON.parse(sessionStorage.getItem('savedNumbers') || '[]');
+              prev.push(saved);
+              if (prev.length > 2) prev = prev.slice(-2);
+              sessionStorage.setItem('savedNumbers', JSON.stringify(prev));
+              document.getElementById('savedValue').textContent = prev.join(' | ');
+              document.getElementById('savedBlock').style.display = 'block';
+            };
+          }
+
+        }, 1000);
+      }
+    
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopRecordBtn');
+
+      let mediaRecorder;
+      let recordedChunks = [];
+
+      recordBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        startRecording();
+      });
+
+      stopBtn.addEventListener('click', () => {
+        stopRecording();
+      });
+
+      async function startRecording() {
+        try {
+          const stream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: 10 } });
+          mediaRecorder = new MediaRecorder(stream);
+          recordedChunks = [];
+
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) recordedChunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: "video/webm" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url;
+            a.download = "generation.webm";
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              URL.revokeObjectURL(url);
+              document.body.removeChild(a);
+            }, 100);
+            stopBtn.style.display = 'none';
+          };
+
+          mediaRecorder.start();
+          stopBtn.style.display = 'inline-block';
+          alert('Запись началась. Нажмите "Остановить запись" или "Stop sharing", чтобы сохранить видео.');
+
+        } catch (err) {
+          alert('Ошибка записи: ' + err.message);
+        }
+      }
+
+      function stopRecording() {
+        if (!mediaRecorder) {
+          alert("Запись ещё не началась.");
+          return;
+        }
+
+        if (mediaRecorder.state !== 'inactive') {
+          mediaRecorder.stop();
+        } else {
+          alert("Запись уже остановлена.");
+        }
+      }
+
+    const rangeSlider = document.getElementById('rangeSlider');
+    const rangeValue = document.getElementById('rangeValue');
+
+    function updateSliderStyle() {
+      const val = ((rangeSlider.value - rangeSlider.min) / (rangeSlider.max - rangeSlider.min)) * 100;
+      rangeSlider.style.setProperty('--val', `${val}%`);
+    }
+
+    rangeSlider.addEventListener('input', function () {
+      rangeValue.textContent = this.value;
+      updateSliderStyle();
+    });
+
+    document.getElementById('exclude').addEventListener('change', function () {
+      const block = document.getElementById('excludeInput');
+      block.style.display = this.checked ? 'block' : 'none';
+    });
+
+    updateSliderStyle();
+
+  </script>
+</body>
+</html>

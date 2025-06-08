@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Факт дня</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+        @media (max-width: 600px) {
+        body {
+        font-size: 14px;
+        }
+
+        .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        }
+
+        .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        }
+
+        .menu-item {
+        flex: 1 0 20%;
+        text-align: center;
+        }
+
+        .logo {
+        font-size: 1rem;
+        padding: 6px 12px;
+        }
+
+        h1 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        }
+
+        .eight-ball-container {
+        width: 90%;
+        max-width: 300px;
+        }
+
+        #password {
+        font-size: 2rem;
+        padding: 0 1rem;
+        word-break: break-word;
+        }
+
+        button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        }
+
+        input[type="range"] {
+        width: 100%;
+        }
+
+        .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        }
+    }
+    
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+    .fact-container {
+      max-width: 700px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+    .fact-text {
+      font-size: 1.3rem;
+      margin: 1.5rem 0;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 4px 0 #c17400,
+        0 5px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="index.html" class="logo">BandStuff</a>
+      <a class="menu-item" href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item" href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item" href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item" href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item" href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item" href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item" href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item" href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <div class="fact-container">
+    <h2>Факт дня:</h2>
+    <div class="fact-text" id="fact">—</div>
+    <button class="btn" onclick="generateFact()">Сгенерировать</button>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">
+      новый факт или<br>
+      <a href="index.html" style="color:black; text-decoration: underline;">на главную страницу?</a>
+    </p>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> · 
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="donate.html" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+
+  <script>
+    const facts = [
+      "Если во время резки лука жевать жевательную резинку, вы не будете плакать.",
+      "Сердце креветки находится в её голове.",
+      "У осьминога три сердца.",
+      "Мед — единственный продукт, который не портится.",
+      "Крокодилы не могут высовывать язык.",
+      "Улитка может спать три года подряд.",
+      "У пчёл есть волоски на глазах.",
+      "На Юпитере и Сатурне идёт дождь из алмазов.",
+      "Страусы могут бегать быстрее лошадей.",
+      "Тараканы могут выжить без головы неделю.",
+      "Бананы — ягоды, а клубника — нет.",
+      "Зебры белые с чёрными полосками, а не наоборот.",
+      "Морская звезда не имеет мозга и крови.",
+      "Огурец на 95% состоит из воды.",
+      "Каждая снежинка уникальна.",
+      "Пчёлы могут распознавать лица.",
+      "Человек моргает примерно 15–20 раз в минуту.",
+      "Жирафы спят меньше 2 часов в сутки.",
+      "Пингвины предлагают камень как знак любви.",
+      "Шоколад может быть смертельным для собак.",
+      "Радуга может появиться ночью — это лунная радуга.",
+      "Самый сильный мускул в теле — язык.",
+      "У кенгуру не бывает заднего хода.",
+      "Дельфины спят с открытым одним глазом.",
+      "Осьминог может отрастить потерянную конечность.",
+      "У человека отпечаток языка уникален, как и отпечаток пальца.",
+      "Чих вылетает со скоростью до 160 км/ч.",
+      "Гуси могут помнить людей годами.",
+      "В Антарктиде нет медведей.",
+      "Коты могут издавать до 100 различных звуков.",
+      "Волки воют не на Луну, а чтобы общаться.",
+      "У акул нет костей, только хрящи.",
+      "Слон — единственное животное, которое не может прыгать.",
+      "Мозг работает активнее во сне, чем днём.",
+      "Бабочки пробуют пищу лапками.",
+      "Самая длинная клетка — нерв в ноге жирафа.",
+      "У человека больше бактерий, чем клеток.",
+      "Каждый день в мире рождается около 350 тыс. человек.",
+      "Курение убивает более 8 миллионов человек ежегодно.",
+      "Самое маленькое млекопитающее — летучая мышь китти."
+    ];
+
+    function generateFact() {
+      const fact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('fact').textContent = fact;
+    }
+
+    generateFact();
+  </script>
+</body>
+</html>

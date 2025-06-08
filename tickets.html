@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Счастливый билет</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+        @media (max-width: 600px) {
+        body {
+        font-size: 14px;
+        }
+
+        .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        }
+
+        .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        }
+
+        .menu-item {
+        flex: 1 0 20%;
+        text-align: center;
+        }
+
+        .logo {
+        font-size: 1rem;
+        padding: 6px 12px;
+        }
+
+        h1 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        }
+
+        .eight-ball-container {
+        width: 90%;
+        max-width: 300px;
+        }
+
+        #password {
+        font-size: 2rem;
+        padding: 0 1rem;
+        word-break: break-word;
+        }
+
+        button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        }
+
+        input[type="range"] {
+        width: 100%;
+        }
+
+        .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        }
+    }
+    
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+    .ticket-box {
+      text-align: center;
+      margin: 2rem auto;
+    }
+    .ticket {
+      border: 4px dashed #ccc;
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 3rem;
+      color: red;
+      background: white;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .message {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: crimson;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 4px 0 #c17400,
+        0 5px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .ticket {
+        background: white;
+        padding: 1rem 3rem;
+        border: 5px solid #ccc;
+        border-radius: 15px;
+        font-size: 4rem;
+        font-weight: bold;
+        color: red;
+        position: relative;
+        display: inline-block;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background-image: radial-gradient(ellipse at center, #ffffff 0%, #f7f7f7 100%);
+    }
+    .ticket::before,
+    .ticket::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 40px;
+        background: #f2f2f2;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid #ccc;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    .ticket::before {
+        left: -22px;
+    }
+    .ticket::after {
+        right: -22px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="index.html" class="logo">BandStuff</a>
+      <a class="menu-item" href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item" href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item" href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item" href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item" href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item" href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item" href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item" href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <div class="ticket-box">
+    <h2>Ваш билет:</h2>
+    <div class="ticket" id="ticketNumber">—</div>
+    <div class="message" id="message">—</div>
+    <button class="btn" onclick="generateTicket()">Сгенерировать</button>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">новый счастливый билет</p>
+    <p style="font-size: 0.9rem; color: #444;">
+      Сгенерировано билетов — <span id="totalGenerated">0</span><br>
+      Из них счастливых — <span id="luckyCount">0</span>
+    </p>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> ·  
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="donate.html" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+
+  <script>
+    let total = 0;
+    let lucky = 0;
+
+    function isLuckyTicket(number) {
+      const str = number.toString().padStart(6, '0');
+      const sum1 = +str[0] + +str[1] + +str[2];
+      const sum2 = +str[3] + +str[4] + +str[5];
+      return sum1 === sum2;
+    }
+
+    function generateTicket() {
+      const num = Math.floor(Math.random() * 1000000);
+      const padded = num.toString().padStart(6, '0');
+      document.getElementById('ticketNumber').textContent = padded;
+
+      const luckyTicket = isLuckyTicket(num);
+      document.getElementById('message').textContent = luckyTicket
+        ? 'Поздравляем! Это счастливый билет!' : 'Неудача... Стоит попробовать ещё раз!';
+
+      total++;
+      if (luckyTicket) lucky++;
+      document.getElementById('totalGenerated').textContent = total.toLocaleString('ru-RU');
+      document.getElementById('luckyCount').textContent = lucky.toLocaleString('ru-RU');
+    }
+  </script>
+</body>
+</html>

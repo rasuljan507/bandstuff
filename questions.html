@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вопросы</title>
+  <link rel="icon" href="favicon.png">
+  <style>
+    body {
+      background: #f2f2f2 url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      font-family: sans-serif;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .topbar {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      color: white;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      background: linear-gradient(to bottom, #f9d835, #f39c12);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: #ffcc00;
+    }
+    .footer {
+      background-color: #2a2a2a;
+      background-image: repeating-linear-gradient(45deg, #2a2a2a 0, #2a2a2a 2px, #333 2px, #333 4px);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      padding: 1rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+    }
+    .footer a {
+      color: #facc15;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .question-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .option {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .option:hover {
+      background: #f9d835;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #ffec64 0%, #ffab23 100%);
+      border: none;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Verdana", sans-serif;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 4px 0 #c17400,
+        0 5px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s ease-in-out;
+    }
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 0 0 1px #d18700,
+        0 2px 0 #c17400,
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .stats {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      color: green;
+    }
+    .reset {
+      cursor: pointer;
+      margin-left: 0.5rem;
+      color: red;
+    }
+    @media (max-width: 600px) {
+      .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
+      .menu-item {
+        flex: 1 0 20%;
+        text-align: center;
+      }
+      .logo {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+      .question-container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="menu">
+      <a href="index.html" class="logo">BandStuff</a>
+      <a class="menu-item" href="wheel.html">🎯<span>Колесо фортуны</span></a>
+      <a class="menu-item" href="index.html">123<br><span>Числа</span></a>
+      <a class="menu-item" href="passwords.html">***<span>Пароли</span></a>
+      <a class="menu-item" href="predictions.html">🔮<span>Предсказания</span></a>
+      <a class="menu-item" href="questions.html">❓❓<span>Вопросы</span></a>
+      <a class="menu-item" href="tickets.html">🎟<span>Билеты</span></a>
+      <a class="menu-item" href="facts.html">⚠<span>Факты</span></a>
+      <a class="menu-item" href="wisdom.html">📖<span>Мудрости</span></a>
+    </div>
+  </div>
+
+  <div class="question-container">
+    <h2 id="questionText">Вопрос загружается...</h2>
+    <div class="options" id="optionsContainer"></div>
+    <button class="btn" onclick="nextQuestion()">Сгенерировать</button>
+    <div class="stats">
+      Верных: <span id="correctCount">0</span>, Неверных: <span id="wrongCount">0</span>
+      <span class="reset" onclick="resetStats()">⭮</span>
+    </div>
+  </div>
+
+  <div class="footer">
+  <div class="footer-content">
+    <div><strong>Поделиться:</strong> 
+      <a href="https://vk.com/share.php" target="_blank">VK</a> ·  
+      <a href="https://t.me/share/url?url=https://your-site.com" target="_blank">Telegram</a> · 
+      <a href="https://api.whatsapp.com/send?text=https://your-site.com" target="_blank">WhatsApp</a>
+    </div>
+    <div>|</div>
+    <div><a href="" style="color: red; font-weight: bold; text-decoration: none;">Поддержать проект ❤️</a> | 
+      <a href="/" style="color: #facc15; font-weight: bold; text-decoration: none;">BandStuff</a>
+    </div>
+  </div>
+</div>
+
+    <script>
+            let questions = [];
+            let currentIndex = -1;
+            let correct = 0;
+            let wrong = 0;
+
+            fetch('quests.json')
+                .then(res => res.json())
+                .then(data => {
+                questions = data;
+                nextQuestion();
+                });
+
+            function nextQuestion() {
+                if (!questions.length) return;
+                currentIndex = Math.floor(Math.random() * questions.length);
+                const q = questions[currentIndex];
+                document.getElementById('questionText').textContent = q.question;
+
+                const container = document.getElementById('optionsContainer');
+                container.innerHTML = '';
+
+                q.options.forEach((text, idx) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = text;
+                div.onclick = () => checkAnswer(idx);
+                container.appendChild(div);
+                });
+            }
+
+            function checkAnswer(index) {
+                if (index === questions[currentIndex].answer) correct++;
+                else wrong++;
+                document.getElementById('correctCount').textContent = correct;
+                document.getElementById('wrongCount').textContent = wrong;
+                nextQuestion();
+            }
+
+            function resetStats() {
+                correct = 0;
+                wrong = 0;
+                document.getElementById('correctCount').textContent = correct;
+                document.getElementById('wrongCount').textContent = wrong;
+            }
+        </script>
+    </body>
+</html>
